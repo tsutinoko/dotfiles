@@ -163,7 +163,7 @@ noremap <S-l>   $
 inoremap <silent> jj <ESC>
 inoremap <silent> っj <ESC>
 
-
+" タブ追加
 nnoremap tab :<C-u>tabnew<CR>
 
 "カーソルキー無効化
