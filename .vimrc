@@ -163,6 +163,9 @@ noremap <S-l>   $
 inoremap <silent> jj <ESC>
 inoremap <silent> っj <ESC>
 
+
+nnoremap tab :<C-u>tabnew<CR>
+
 "カーソルキー無効化
 "HardModeと入力するとカーソルキー無効
 function! HardMode ()
