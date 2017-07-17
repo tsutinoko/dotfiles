@@ -9,8 +9,8 @@ set noswapfile
 set autoread
 " バッファが編集中でもその他のファイルを開けるように
 set hidden
-" 入力中のコマンドをステータスに表示する
-set showcmd
+" 入力中のコマンドをステータスに表示する(チカチカするので不使用)
+" set showcmd
 " delete keyが効かない対策
 set backspace=indent,eol,start
 
@@ -24,7 +24,7 @@ inoremap <special> <Esc>O[ <Esc> ]]
 set number
 " 現在の行を強調表示
 set cursorline
-" 現在の行を強調表示（縦）
+" 現在の列を強調表示
 set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore

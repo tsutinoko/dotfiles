@@ -147,5 +147,10 @@ zstyle ':completion:*:options' description 'yes'
 setopt CDABLE_VARS
 hash -d htdocs=/Applications/MAMP/htdocs
 
+
+# PROMPT
 # 右プロンプトに現在地を表示。
 RPROMPT="%{$fg_bold[white]%}[%{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%}%{$fg_bold[white]%}]%{$reset_color%}"
+
+# スペルミス時の「もしかして」表示の文言を変更
+SPROMPT="%{$fg[yellow]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[yellow]%}かな? [そう!(y), 違う!(n),a,e]:${reset_color} "
