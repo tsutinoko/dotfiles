@@ -146,6 +146,7 @@ zstyle ':completion:*:options' description 'yes'
 #hashの'~'を省略
 setopt CDABLE_VARS
 hash -d htdocs=/Applications/MAMP/htdocs
+hash -d desktop=~/Desktop
 
 #
 # PROMPT
