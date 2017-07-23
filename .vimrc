@@ -166,6 +166,9 @@ inoremap <silent> っj <ESC>
 " タブ追加
 nnoremap tab :<C-u>tabnew<CR>
 
+" クリップボードの内容をペースト
+nmap <C-p> :r !pbpaste
+
 "カーソルキー無効化
 "HardModeと入力するとカーソルキー無効
 function! HardMode ()
