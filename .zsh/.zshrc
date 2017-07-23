@@ -147,10 +147,42 @@ zstyle ':completion:*:options' description 'yes'
 setopt CDABLE_VARS
 hash -d htdocs=/Applications/MAMP/htdocs
 
-
+#
 # PROMPT
-# 右プロンプトに現在地を表示。
-RPROMPT="%{$fg_bold[white]%}[%{$reset_color%}%{$fg[cyan]%}%~%{$reset_color%}%{$fg_bold[white]%}]%{$reset_color%}"
+#
 
 # スペルミス時の「もしかして」表示の文言を変更
 SPROMPT="%{$fg[yellow]%}%{$suggest%}(*'~'%)? < もしかして %B%r%b %{$fg[yellow]%}かな? [そう!(y), 違う!(n),a,e]:${reset_color} "
+
+# 右プロンプトにgitのstatusと現在地を表示
+source ~/.zsh/git-prompt.sh
+function rprompt-git-current-branch {
+        local name st color
+
+        if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
+                return
+        fi
+        name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+        if [[ -z $name ]]; then
+                return
+        fi
+        st=`git status 2> /dev/null`
+        if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+                color=${fg[green]}
+        elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+                color=${fg[yellow]}
+        elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+                color=${fg_bold[red]}
+        else
+                color=${fg[red]}
+        fi
+
+        # %{...%} は囲まれた文字列がエスケープシーケンスであることを明示する
+        # これをしないと右プロンプトの位置がずれる
+        echo "%{$color%}$name%{$reset_color%} "
+}
+
+# プロンプトが表示されるたびにプロンプト文字列を評価、置換する
+setopt prompt_subst
+
+RPROMPT='[`rprompt-git-current-branch`%{$fg[cyan]%}%~%{$reset_color%}]'
