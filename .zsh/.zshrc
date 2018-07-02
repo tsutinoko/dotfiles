@@ -1,6 +1,5 @@
 # Created by newuser for 5.2
 fpath=(/usr/local/share/zsh-completions $fpath)
-export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # http://post.simplie.jp/posts/60 の設定
 #
@@ -86,9 +85,9 @@ setopt pushd_ignore_dups
 setopt correct
 
 #初回シェル時のみtmuxを実行
-if [ $SHLVL = 1 ]; then
-   tmux
-fi
+#if [ $SHLVL = 1 ]; then
+#   tmux
+#fi
 
 #
 # Exports
@@ -170,12 +169,14 @@ function rprompt-git-current-branch {
         st=`git status 2> /dev/null`
         if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
                 color=${fg[green]}
-        elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+        elif [[ -n `echo "$st" | grep "^Changes not staged for commit"` ]]; then
+                color=${fg[red]}
+        elif [[ -n `echo "$st" | grep "^Changes to be committed"` ]]; then
                 color=${fg[yellow]}
         elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
                 color=${fg_bold[red]}
         else
-                color=${fg[red]}
+                color=${fg[yellow]}
         fi
 
         # %{...%} は囲まれた文字列がエスケープシーケンスであることを明示する
@@ -187,3 +188,7 @@ function rprompt-git-current-branch {
 setopt prompt_subst
 
 RPROMPT='[`rprompt-git-current-branch`%{$fg[cyan]%}%~%{$reset_color%}]'
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
