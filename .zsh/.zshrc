@@ -106,11 +106,11 @@ export LANG=ja_JP.UTF-8
 # Key bindings
 #
 
-bindkey -v
-bindkey -v '^?' backward-delete-char
-bindkey '^[[Z' reverse-menu-complete
+# keybind はemacsを使用する
+bindkey -e
+bindkey '^[[Z' reverse-menu-complete ## Shift-Tabで補完候補を逆順する
 
-#anyframeがよく分からないので一旦除外
+# anyframeがよく分からないので一旦除外
 #bindkey '^@' anyframe-widget-cd-ghq-repository
 #bindkey '^r' anyframe-widget-put-history
 
@@ -188,6 +188,9 @@ function rprompt-git-current-branch {
 setopt prompt_subst
 
 RPROMPT='[`rprompt-git-current-branch`%{$fg[cyan]%}%~%{$reset_color%}]'
+
+PROMPT="%{${fg[green]}%}[%n:%~]%{${reset_color}%}
+%# "
 
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
