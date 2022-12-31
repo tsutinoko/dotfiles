@@ -1,18 +1,31 @@
 # Created by newuser for 5.2
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+#
+# anyenv
+#
+
+# 環境変数追加
+if [ -e "$HOME/.anyenv" ]
+then
+  export ANYENV_ROOT="$HOME/.anyenv"
+  export PATH="$ANYENV_ROOT/bin:$PATH"
+  if command -v anyenv 1>/dev/null 2>&1
+  then
+    eval "$(anyenv init -)"
+  fi
+fi
+
 # http://post.simplie.jp/posts/60 の設定
 #
 # zplug
 #
 
-# zpulgの環境変数追加
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+#別途zplugをインストールしておく
+# $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
-# brewを通さずインストールしたときのもの
-# 上記で環境変数を追加しているので不要かも
-# source ~/.zplug/init.zsh
+# zpulgの環境変数追加
+source ~/.zplug/init.zsh
 
 zplug 'zsh-users/zsh-autosuggestions'
 zplug 'zsh-users/zsh-completions'
@@ -191,7 +204,3 @@ RPROMPT='[`rprompt-git-current-branch`%{$fg[cyan]%}%~%{$reset_color%}]'
 
 PROMPT="%{${fg[yellow]}%}[%n:%~]%{${reset_color}%}
 %B%#%b "
-
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
