@@ -63,27 +63,39 @@ set wrapscan
 set hlsearch
 
 " プラグイン関連
-call plug#begin('~/.vim/plugged')
+" vim-jetpackをインストール
+let s:jetpackfile = expand('<sfile>:p:h') .. '/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = "https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim"
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+endif
+
+packadd vim-jetpack
+call jetpack#begin()
+
+" bootstrap
+Jetpack 'tani/vim-jetpack', {'opt': 1}
+
 " ツリー表示
-Plug 'scrooloose/nerdtree'
+Jetpack 'scrooloose/nerdtree'
 " 不可視ファイルを表示する
 let NERDTreeShowHidden = 1
 
 " タブ間でのツリー共有
-Plug 'jistr/vim-nerdtree-tabs'
+Jetpack 'jistr/vim-nerdtree-tabs'
 " ファイルが指定されていなければNERD treeを有効にする
 if argc() == 0
   let g:nerdtree_tabs_open_on_console_startup = 1
 end
 
 " ファイル変更の際にツリーにアイコンを表示
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Jetpack 'Xuyuanp/nerdtree-git-plugin'
 
 " ファイル変更の際に行番号に差分を表示
-Plug 'airblade/vim-gitgutter'
+Jetpack 'airblade/vim-gitgutter'
 
 " ステータスバー、タブバーをカスタマイズ
-Plug 'vim-airline/vim-airline'
+Jetpack 'vim-airline/vim-airline'
 " Powerline系フォントを利用する
 let g:airline_powerline_fonts = 1
 " タブバーのカスタマイズを有効にする
@@ -94,51 +106,51 @@ let g:airline#extensions#tabline#show_tab_type = 0
 let g:airline#extensions#tabline#show_close_button = 0
 
 " カラースキーマ
-Plug 'nanotech/jellybeans.vim'
+Jetpack 'nanotech/jellybeans.vim'
 
 " ファイル末尾の余分なスペースをハイライト表示
-Plug 'bronson/vim-trailing-whitespace'
+Jetpack 'bronson/vim-trailing-whitespace'
 autocmd BufWritePre * :FixWhitespace
 
 " インデントの深さを視覚的に表示
-Plug 'Yggdroot/indentLine'
+Jetpack 'Yggdroot/indentLine'
 let g:indentLine_color_term = 111
 let g:indentLine_color_gui = '#708090'
 set list listchars=tab:\¦\
 let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'calendar', 'thumbnail', 'tweetvim']
 " 自動補完
-Plug 'Shougo/neocomplete.vim'
+Jetpack 'Shougo/neocomplete.vim'
 " 自動補完機能を有効にする
 let g:neocomplete#enable_at_startup = 1
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+Jetpack 'Shougo/neosnippet'
+Jetpack 'Shougo/neosnippet-snippets'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " カッコの自動補完
-Plug 'Townk/vim-autoclose'
+Jetpack 'Townk/vim-autoclose'
 
 " emmet
-Plug 'mattn/emmet-vim'
+Jetpack 'mattn/emmet-vim'
 "ctrl + eで展開
 let g:user_emmet_expandabbr_key ='<c-e>'
 let g:user_emmet_settings ={'indentation':'  ','lang':'ja'}
 
 " javascriptのsyntaxハイライト
-Plug 'othree/yajs.vim', {'autoload':{'filetypes':['javascript']}}
+Jetpack 'othree/yajs.vim', {'autoload':{'filetypes':['javascript']}}
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
 " typescriptのsyntaxハイライト
-Plug 'leafgarland/typescript-vim'
+Jetpack 'leafgarland/typescript-vim'
 
 " typescriptの補完
-Plug 'Quramy/tsuquyomi'
+Jetpack 'Quramy/tsuquyomi'
 autocmd BufNewFile,BufRead *.ts     set filetype=typescript
 autocmd BufNewFile,BufRead *.tsx    set filetype=typescript
 
 " 非同期処理
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Jetpack 'Shougo/vimproc.vim', {'do' : 'make'}
 
-call plug#end()
+call jetpack#end()
 
 " カラースキーマを宣言する
 syntax enable
