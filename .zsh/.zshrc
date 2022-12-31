@@ -5,6 +5,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # anyenv
 #
 
+# 別途anyenvをインストールしておく
+# git clone https://github.com/anyenv/anyenv ~/.anyenv
+
 # 環境変数追加
 if [ -e "$HOME/.anyenv" ]
 then
@@ -21,7 +24,7 @@ fi
 # zplug
 #
 
-#別途zplugをインストールしておく
+# 別途zplugをインストールしておく
 # $ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
 # zpulgの環境変数追加
